@@ -1,7 +1,7 @@
-package com.wikia.meownjik.pageobjects;
+package com.wikia.meownjik.webdriver.pageobjects;
 
-import com.wikia.meownjik.pageelements.Link;
-import com.wikia.meownjik.util.WaitsSwitcher;
+import com.wikia.meownjik.webdriver.pageelements.Link;
+import com.wikia.meownjik.webdriver.util.WaitsSwitcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

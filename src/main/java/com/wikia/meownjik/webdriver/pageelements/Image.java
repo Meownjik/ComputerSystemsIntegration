@@ -1,6 +1,6 @@
-package com.wikia.meownjik.pageelements;
+package com.wikia.meownjik.webdriver.pageelements;
 
-import com.wikia.meownjik.locators.Locator;
+import com.wikia.meownjik.webdriver.locators.Locator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 

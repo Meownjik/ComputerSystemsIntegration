@@ -1,4 +1,4 @@
-package com.wikia.meownjik;
+package com.wikia.meownjik.webdriver;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

@@ -1,4 +1,4 @@
-package com.wikia.meownjik.locators;
+package com.wikia.meownjik.webdriver.locators;
 
 import org.openqa.selenium.By;
 

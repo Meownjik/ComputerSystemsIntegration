@@ -1,4 +1,4 @@
-package com.wikia.meownjik.util;
+package com.wikia.meownjik.webdriver.util;
 
 import java.util.Set;
 

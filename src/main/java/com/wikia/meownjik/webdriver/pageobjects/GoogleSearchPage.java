@@ -1,11 +1,9 @@
-package com.wikia.meownjik.pageobjects;
+package com.wikia.meownjik.webdriver.pageobjects;
 
-import com.wikia.meownjik.pageelements.InputBox;
-import com.wikia.meownjik.util.WaitsSwitcher;
+import com.wikia.meownjik.webdriver.pageelements.InputBox;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static com.wikia.meownjik.locators.GoogleSearchLocators.*;
+import static com.wikia.meownjik.webdriver.locators.GoogleSearchLocators.*;
 
 public class GoogleSearchPage extends BasePageObject {
     private InputBox searchField;
