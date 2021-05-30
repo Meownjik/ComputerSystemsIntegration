@@ -38,6 +38,15 @@ public class RabbitMqTest {
                 System.out.println(" [x] Sent '" + message + "'");
             }
         }
+    }
 
+    @Test
+    public void senderAndReceiverTest() throws IOException, TimeoutException {
+        var receiver = new MqReceiver();
+        receiver.receive();
+        var sender = new MqSender();
+        for (var message : new String[]{"Hello World!", "Test"}) {
+            sender.send(message);
+        }
     }
 }
