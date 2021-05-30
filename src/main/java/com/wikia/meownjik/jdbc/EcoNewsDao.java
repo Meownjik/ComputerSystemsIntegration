@@ -9,7 +9,13 @@ public class EcoNewsDao {
 
     public void insert(EcoNewsEntity ecoNewsEntity) {
         Statement statement = ManagerDao.get().getStatement();
-        // TODO
+        try {
+            statement.execute(String.format(EcoNewsEntity.INSERT,
+                    ecoNewsEntity.getTitle(), ecoNewsEntity.getText()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
         ManagerDao.closeStatement(statement);
     }
 

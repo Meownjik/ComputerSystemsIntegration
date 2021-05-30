@@ -30,6 +30,8 @@ public class EcoNewsEntity {
     public static final String SELECT_BY_FIELD_LIKE = "SELECT * FROM tbl WHERE %s LIKE '%s';";
     public static final String DELETE_BY_TITLE = "DELETE FROM tbl WHERE "
             + EcoNewsEntityFields.TITLE.getName() + "='%s';";
+    public static final String INSERT = "INSERT INTO tbl (" + EcoNewsEntityFields.TITLE.getName() + ", "
+            + EcoNewsEntityFields.TEXT.getName() + ") VALUES ('%s', '%s')";
 
     private String text;
     private String title;
@@ -39,7 +41,7 @@ public class EcoNewsEntity {
         title = "";
     }
 
-    public EcoNewsEntity(String text, String title) {
+    public EcoNewsEntity(String title, String text) {
         this.text = text;
         this.title = title;
     }

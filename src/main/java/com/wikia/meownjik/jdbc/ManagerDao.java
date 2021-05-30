@@ -8,14 +8,14 @@ public final class ManagerDao {
     private String username;
     private String password;
     private String url;
-    private Map<Long, Connection> connections;
+    private final Map<Long, Connection> connections;
 
     private ManagerDao() {
         connections = new HashMap<>();
         registerDriver();
         readProperties();
     }
-    private Properties property = new Properties();
+
     private void registerDriver() {
         try {
             DriverManager.registerDriver(new org.postgresql.Driver());
@@ -27,7 +27,7 @@ public final class ManagerDao {
     private void readProperties() {
         username =  System.getenv().get("JDBC_USERNAME");
         password = System.getenv().get("JDBC_PASSWROD");
-        url = System.getenv().get("JDBC_URL_TEST"); //TODO null. Maybe needs reload?
+        url = System.getenv().get("JDBC_URL_TEST");
     }
 
     public static ManagerDao get() {
