@@ -6,7 +6,7 @@ public class Notificator {
 
     private Notificator() {}
 
-    public static void displayTray(String header, String message) throws AWTException {
+    public static void displayTray(String header, String message) {
         //Obtain only one instance of the SystemTray object
         SystemTray tray = SystemTray.getSystemTray();
 
@@ -20,7 +20,11 @@ public class Notificator {
         trayIcon.setImageAutoSize(true);
         //Set tooltip text for the tray icon
         trayIcon.setToolTip("System tray icon demo");
-        tray.add(trayIcon);
+        try {
+            tray.add(trayIcon);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
 
         trayIcon.displayMessage(header, message, TrayIcon.MessageType.INFO);
     }
