@@ -19,51 +19,51 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 public interface StableWebElementSearch {
     /**
      * set Webdriver that should to be used
+     *
      * @return WebDriver
      */
-    WebDriver setDriver();
+    WebDriver getDriver();
 
-    default public WebElement searchElementByCss(By locator){
+    default WebElement searchElementByCss(By locator) {
         return explicitSearch(visibilityOfElementLocated(locator));
     }
 
-    default public WebElement searchElementByCss(String locator){
+    default WebElement searchElementByCss(String locator) {
         return explicitSearch(visibilityOfElementLocated(By.cssSelector(locator)));
     }
 
-    default public WebElement searchElementByXpath(By xPath){
+    default WebElement searchElementByXpath(By xPath) {
         return explicitSearch(visibilityOfElementLocated(xPath));
     }
 
-    default public WebElement searchElementByXpath(String xPath){
+    default WebElement searchElementByXpath(String xPath) {
         return explicitSearch(visibilityOfElementLocated(By.xpath(xPath)));
     }
 
-    default public List<WebElement> searchElementsByCss(By locator){
+    default List<WebElement> searchElementsByCss(By locator) {
         searchElementByCss(locator);
-        return setDriver().findElements(locator);
+        return getDriver().findElements(locator);
     }
 
-    default public List<WebElement> searchElementsByXpath(By locator){
+    default List<WebElement> searchElementsByXpath(By locator) {
         searchElementByCss(locator);
-        return setDriver().findElements(locator);
+        return getDriver().findElements(locator);
     }
 
-
-    default public List<WebElement> searchElementsByCss(String locator){
+    default List<WebElement> searchElementsByCss(String locator) {
         searchElementByCss(locator);
-        return setDriver().findElements(By.cssSelector(locator));
+        return getDriver().findElements(By.cssSelector(locator));
     }
 
-    default public List<WebElement> searchElementsXpath(String locator){
+    default List<WebElement> searchElementsXpath(String locator) {
         searchElementByCss(locator);
-        return setDriver().findElements(By.cssSelector(locator));
+        return getDriver().findElements(By.cssSelector(locator));
     }
 
-    default public <V> V explicitSearch(Function<? super WebDriver, V> condition){
-        setDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        V element = (new WebDriverWait(setDriver(),20)).until(condition);
-        setDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    default <V> V explicitSearch(Function<? super WebDriver, V> condition) {
+        getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        V element = (new WebDriverWait(getDriver(), 20)).until(condition);
+        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return element;
     }
 

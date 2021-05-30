@@ -1,7 +1,7 @@
 package com.wikia.meownjik.webdriver.search;
 
-import com.wikia.meownjik.webdriver.pageobjects.EcoNewsPage;
 import com.wikia.meownjik.webdriver.TestRunner;
+import com.wikia.meownjik.webdriver.pageobjects.EcoNewsPage;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
