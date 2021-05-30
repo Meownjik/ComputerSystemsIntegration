@@ -2,6 +2,9 @@ package com.wikia.meownjik.webdriver;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -15,7 +18,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class TestRunner {
     protected static WebDriver driver;
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //protected static WaitsSwitcher waitsSwitcher;
+
     public TestRunner() {
 
     }
@@ -24,7 +29,9 @@ public class TestRunner {
     public static void setUpClass() {
         String webDriverPath = System.getenv("webDriverPath");
         System.setProperty("webdriver.chrome.driver", webDriverPath);
-        driver = new ChromeDriver();
+        var options = new ChromeOptions();
+        //options.setHeadless(true);
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(1500, TimeUnit.MILLISECONDS);
         //waitsSwitcher = new WaitsSwitcher(driver, 1, 5);
@@ -32,14 +39,15 @@ public class TestRunner {
     }
 
     @AfterClass
-    public static void tearDownClass() {
+    public void tearDownClass() {
         driver.close();
         driver.quit();
     }
 
     @BeforeMethod
     public void setUp() {
-        driver.navigate().to("https://www.google.com.ua/");
+        //driver.navigate().to("https://www.google.com.ua/");
+        driver.navigate().to("https://ita-social-projects.github.io/GreenCityClient/#/news");
     }
 
     @AfterMethod
