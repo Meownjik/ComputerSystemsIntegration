@@ -1,5 +1,6 @@
 package com.wikia.meownjik.jdbc;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class DBConnectionTest {
@@ -18,5 +19,11 @@ public class DBConnectionTest {
         var news = new EcoNewsEntity("Insert title", "Insert text");
         dao.insert(news);
         System.out.println(dao.selectByTitle(news.getTitle()));
+    }
+
+    @Test
+    public void getUnexistingTest() {
+        var news = new EcoNewsDao().selectByTitle("not existing");
+        Assert.assertEquals(news.size(), 0, "Error - news list is not empty!");
     }
 }

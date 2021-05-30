@@ -11,7 +11,9 @@ public class EcoNewsDao {
         Statement statement = ManagerDao.get().getStatement();
         try {
             statement.execute(String.format(EcoNewsEntity.INSERT,
-                    ecoNewsEntity.getTitle(), ecoNewsEntity.getText()));
+                    ecoNewsEntity.getTitle().replace("'", "").replace("\\", ""),
+                    ecoNewsEntity.getText().replace("'", "").replace("\\", "")
+            ));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
@@ -23,15 +25,20 @@ public class EcoNewsDao {
         Statement statement = ManagerDao.get().getStatement();
         List<List<String>> rows = null;
         try {
+            ResultSet resultSet;
             if (exactMatch) {
-                ResultSet resultSet = statement.executeQuery(String.format(EcoNewsEntity.SELECT_BY_FIELD, field, value));
-                rows = ManagerDao.get().parseResultSet(resultSet);
+                resultSet = statement.executeQuery(
+                        String.format(EcoNewsEntity.SELECT_BY_FIELD,
+                                field.replace("'", "").replace("\\", ""),
+                                value.replace("'", "").replace("\\", "")
+                        ));
             }
             else {
-                ResultSet resultSet = statement.executeQuery(String.format(EcoNewsEntity.SELECT_BY_FIELD_LIKE, field,
-                        "%" + value + "%"));
-                rows = ManagerDao.get().parseResultSet(resultSet);
+                resultSet = statement.executeQuery(String.format(EcoNewsEntity.SELECT_BY_FIELD_LIKE,
+                        field.replace("'", "").replace("\\", ""),
+                        "%" + value.replace("'", "").replace("\\", "") + "%"));
             }
+            rows = ManagerDao.get().parseResultSet(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());

@@ -1,5 +1,7 @@
 package com.wikia.meownjik.webdriver.search;
 
+import com.wikia.meownjik.jdbc.EcoNewsDao;
+import com.wikia.meownjik.jdbc.EcoNewsEntity;
 import com.wikia.meownjik.webdriver.TestRunner;
 import com.wikia.meownjik.webdriver.pageobjects.EcoNewsPage;
 import org.openqa.selenium.WebElement;
@@ -8,7 +10,12 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+/**
+ * This is not actually a test, but a core method that can be run separately
+ */
 public class EcoNewsIntegrationTest extends TestRunner {
+
+    private final EcoNewsDao ecoNewsDao = new EcoNewsDao();
 
     @Test
     public void readNewsViaWebDriver() {
@@ -22,9 +29,20 @@ public class EcoNewsIntegrationTest extends TestRunner {
         Assert.assertEquals(titles.size(), texts.size(),
                 "Error - different size of titles and texts arrays!");
         for (int i = 0; i < titles.size(); i++) {
-            logger.info(titles.get(i).getText());
-            logger.info(texts.get(i).getText());
+            String title = titles.get(i).getText();
+            String text = texts.get(i).getText();
+            logger.info(title);
+            logger.info(text);
             logger.info("--------------------");
+            var newsEntity = new EcoNewsEntity(title, text);
+            insertIntoDB(newsEntity);
+        }
+
+    }
+
+    private void insertIntoDB(EcoNewsEntity newsEntity) {
+        if (ecoNewsDao.selectByTitle(newsEntity.getTitle()).size() == 0) {
+            ecoNewsDao.insert(newsEntity);
         }
     }
 }
