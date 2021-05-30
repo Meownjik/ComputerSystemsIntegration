@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static graphql.Scalars.GraphQLString;
 import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
@@ -61,6 +62,45 @@ public class GraphQlTest {
         ExecutionResult executionResult = graphQL.execute(executionInput);
 
         Object data = executionResult.getData();
+        List<GraphQLError> errors = executionResult.getErrors();
+        System.out.println(data);
+        System.out.println(errors);
+    }
+
+    @Test
+    public void graphQlSingleResultTest() {
+        var newsEntity = new EcoNewsEntity("Tst", "Txt");
+
+        DataFetcher<String> titlesDataFetcher = environment -> newsEntity.getTitle();
+
+        DataFetcher<String> textsDataFetcher = environment -> newsEntity.getTitle();
+
+        GraphQLObjectType newsType = newObject()
+                .name("News")
+                .field(newFieldDefinition()
+                        .name("title")
+                        .type(GraphQLString)
+                        .dataFetcher(titlesDataFetcher))
+                .field(newFieldDefinition()
+                        .name("text")
+                        .type(GraphQLString)
+                        .dataFetcher(textsDataFetcher))
+                .build();
+
+
+        GraphQLSchema schema = GraphQLSchema.newSchema()
+                .query(newsType)
+                .build();
+
+        GraphQL graphQL = GraphQL.newGraphQL(schema)
+                .build();
+
+        ExecutionInput executionInput = ExecutionInput.newExecutionInput().query("query { title, text }")
+                .build();
+
+        ExecutionResult executionResult = graphQL.execute(executionInput);
+
+        Map<String, String> data = executionResult.getData();
         List<GraphQLError> errors = executionResult.getErrors();
         System.out.println(data);
         System.out.println(errors);
