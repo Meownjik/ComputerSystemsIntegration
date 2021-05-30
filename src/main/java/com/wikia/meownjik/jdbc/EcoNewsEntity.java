@@ -67,7 +67,7 @@ public class EcoNewsEntity {
     @Override
     public String toString() {
         return "EcoNewsEntity ["
-                + ", text=" + text
+                + "text=" + text
                 + ", title=" + title
                 + "]";
     }

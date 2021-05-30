@@ -15,4 +15,11 @@ public class JedisTest {
         System.out.println(res);
         Assert.assertEquals(res, "ZTest5", "Error - incorrect pop result");
     }
+
+    @Test
+    public void verifyCachingIntegration() {
+        //Cacher.cache();
+        System.out.println(Cacher.pop());
+        System.out.println(Cacher.pop());
+    }
 }
