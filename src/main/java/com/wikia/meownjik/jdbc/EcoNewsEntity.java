@@ -85,4 +85,17 @@ public class EcoNewsEntity {
         }
         return result;
     }
+
+    public static EcoNewsEntity parseEcoNewsString(String stringRepresentation) {
+        return new EcoNewsEntity(
+                stringRepresentation.substring(
+                        stringRepresentation.indexOf(", title=") + 8,
+                        stringRepresentation.lastIndexOf(']')
+                ),
+                stringRepresentation.substring(
+                        stringRepresentation.indexOf("[text=") + 6,
+                        stringRepresentation.indexOf(", title=")
+                )
+        );
+    }
 }

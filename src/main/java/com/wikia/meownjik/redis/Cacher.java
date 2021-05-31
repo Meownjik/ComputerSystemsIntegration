@@ -25,9 +25,6 @@ public class Cacher {
             cache();
             resStr = jedis.lpop(CACHE_NAME);
         }
-        return new EcoNewsEntity(
-                resStr.substring(resStr.indexOf(", title=") + 8, resStr.lastIndexOf(']')),
-                resStr.substring(resStr.indexOf("[text=") + 6, resStr.indexOf(", title="))
-        );
+        return EcoNewsEntity.parseEcoNewsString(resStr);
     }
 }

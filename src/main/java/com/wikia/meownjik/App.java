@@ -2,7 +2,6 @@ package com.wikia.meownjik;
 
 import com.wikia.meownjik.graphql.NewsClient;
 import com.wikia.meownjik.jdbc.EcoNewsEntity;
-import com.wikia.meownjik.redis.Cacher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
