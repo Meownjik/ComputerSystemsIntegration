@@ -11,10 +11,10 @@ public enum EcoNewsPageLocator implements Locator {
     HEADER(By.cssSelector("H1")),
     TAGS_FILTER_BLOCK(By.cssSelector("app-tag-filter")),
     TAGS_FILTER_LABEL(By.cssSelector("app-tag-filter>div.wrapper>span")),
-    TAGS(By.cssSelector("app-tag-filter>div.wrapper>ul>a")),
+    TAGS(By.cssSelector("app-tag-filter>div.wrapper>ul a")),
     ACTIVE_TAGS(By.cssSelector("li.global-tag-clicked")),
     UNCHECK_TAG_BUTTONS(By.cssSelector(".global-tag-close-icon")),
-    ARTICLES_FOUND_COUNTER(By.cssSelector("app-remaining-count>h2")),
+    ARTICLES_FOUND_COUNTER(By.cssSelector("app-remaining-count h2")),
     DISPLAYED_ARTICLES(By.cssSelector("ul.list>li")),
     DISPLAYED_ARTICLES_TITLES(By.xpath("//div[@class = 'title-list word-wrap']")),
     ARTICLE_IMAGE(By.cssSelector(" div.list-image>img")),
@@ -45,7 +45,7 @@ public enum EcoNewsPageLocator implements Locator {
         this.path = path;
     }
 
-    private By path;
+    private final By path;
 
     @Override
     public By getPath() {
