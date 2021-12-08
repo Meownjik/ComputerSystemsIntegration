@@ -13,6 +13,8 @@ public class SimpleServer implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
         String requestParamValue=null;
 
+        System.out.println(httpExchange.getRequestMethod());
+
         if("GET".equals(httpExchange.getRequestMethod())) {
             requestParamValue = handleGetRequest(httpExchange);
         //} else if("POST".equals(httpExchange)) {
@@ -40,7 +42,7 @@ public class SimpleServer implements HttpHandler {
                 .append("</h1>");
 
         // encode HTML content
-        String htmlResponse = StringEscapeUtils.escapeHtml4(htmlBuilder.toString());
+        String htmlResponse = htmlBuilder.toString();//StringEscapeUtils.escapeHtml4(htmlBuilder.toString());
 
         // this line is a must
         httpExchange.sendResponseHeaders(200, htmlResponse.length());
