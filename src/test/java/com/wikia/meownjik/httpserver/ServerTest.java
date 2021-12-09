@@ -20,9 +20,9 @@ public class ServerTest {
         var threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
         server.setExecutor(threadPoolExecutor);
         server.start();
-        System.out.println(" Server started on port 8001");
-        //http://localhost:8001/test?name=test
-        Thread.sleep(10000);
+        System.out.println(" Server started: http://localhost:8001/test?like=0");
+        System.out.println(" Will be available for 100 seconds");
+        Thread.sleep(100000);
     }
 
     @Test(dependsOnMethods = "startServer")
