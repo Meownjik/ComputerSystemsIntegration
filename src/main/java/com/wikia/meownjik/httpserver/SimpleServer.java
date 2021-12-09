@@ -2,29 +2,29 @@ package com.wikia.meownjik.httpserver;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import org.apache.commons.text.StringEscapeUtils;
+import com.wikia.meownjik.graphql.NewsClient;
+import com.wikia.meownjik.jdbc.EcoNewsEntity;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.Collections;
+import java.util.Random;
 
 public class SimpleServer implements HttpHandler {
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-        String requestParamValue=null;
+        String requestParamValue = null;
 
         System.out.println(httpExchange.getRequestMethod());
 
-        if("GET".equals(httpExchange.getRequestMethod())) {
+        if ("GET".equals(httpExchange.getRequestMethod())) {
             requestParamValue = handleGetRequest(httpExchange);
-        //} else if("POST".equals(httpExchange)) {
-        //    requestParamValue = handlePostRequest(httpExchange);
         }
 
-        handleResponse(httpExchange,requestParamValue);
+        handleResponse(httpExchange, requestParamValue);
     }
 
     private String handleGetRequest(HttpExchange httpExchange) {
@@ -37,17 +37,18 @@ public class SimpleServer implements HttpHandler {
 
     private void handleResponse(HttpExchange httpExchange, String requestParamValue) throws IOException {
         OutputStream outputStream = httpExchange.getResponseBody();
-        /*var htmlBuilder = new StringBuilder();
-
-        htmlBuilder.append("<h1>").
-                append("Hello ")
-                .append(requestParamValue)
-                .append("</h1>");*/
 
         // encode HTML content
         var html = new File(this.getClass().getResource("/webClient.html").getPath());
         String htmlResponse = Files.readString(html.toPath());
-        //String htmlResponse = htmlBuilder.toString();//StringEscapeUtils.escapeHtml4(htmlBuilder.toString());
+
+        var rand = new Random();
+        var newsClient = new NewsClient();
+        EcoNewsEntity news = newsClient.next();
+        if (rand.nextBoolean() && requestParamValue.equals("1")) {
+            htmlResponse += String.format("<script>alert('You might like:\\n%s');</script>", news.getTitle());
+        }
+        htmlResponse += String.format("<script>insert(\"%s\", \"%s\")</script>", news.getTitle(), news.getText());
 
         // this line is a must
         httpExchange.getResponseHeaders().put("Content-Type", Collections.singletonList("text/html"));

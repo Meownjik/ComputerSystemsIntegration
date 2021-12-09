@@ -8,6 +8,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Random;
 
+
+
+/**
+ * Update news database: mvn test -Dtest=EcoNewsIntegrationTest
+ * To run desktop app, run App#main
+ * Run server for web client: mvn test -Dtest=ServerTest
+ */
 public class App
 {
     private static final BufferedReader reader = new BufferedReader(
@@ -29,5 +36,5 @@ public class App
             input = reader.readLine();
         }
     }
-    //mvn test -Dtest=EcoNewsIntegrationTest
+
 }
