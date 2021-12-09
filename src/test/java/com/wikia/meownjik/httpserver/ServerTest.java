@@ -21,6 +21,7 @@ public class ServerTest {
         server.setExecutor(threadPoolExecutor);
         server.start();
         System.out.println(" Server started on port 8001");
+        //http://localhost:8001/test?name=test
         Thread.sleep(10000);
     }
 

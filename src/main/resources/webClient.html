@@ -1,0 +1,22 @@
+<center>
+    <h2 id="header"></h2>
+    <div id="text"></div>
+    <br/>
+    <button id="like">
+        <a href="/test?like=1">Like</a>
+    </button>
+    <button id="dislike">
+        <a href="/test?like=0">Dislike</a>
+    </button>
+    <br/>
+    <button id="next" onclick="insert('test', 'text');">
+        <!--    <a href="/test">Next</a>-->
+        Next
+    </button>
+</center>
+<script>
+function insert(h, txt) {
+  document.getElementById("header").innerHTML = h;
+  document.getElementById("text").innerHTML = txt;
+}
+</script>
